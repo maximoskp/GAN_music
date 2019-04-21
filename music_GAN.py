@@ -152,6 +152,8 @@ with tf.Session() as sess:
     # Run the initializer
     sess.run(init)
 
+    # __MAX__
+    batch_idx = 0
     for i in range(1, num_steps+1):
         # Prepare Data
         # Get the next batch of MNIST data (only images are needed, not labels)

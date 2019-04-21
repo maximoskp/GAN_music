@@ -150,4 +150,5 @@ with tf.Session() as sess:
 
     f.show()
     plt.draw()
-    plt.waitforbuttonpress()
+    plt.savefig('figs/GAN_mnist.png', dpi=300); plt.clf()
+    # plt.waitforbuttonpress()

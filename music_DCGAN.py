@@ -9,9 +9,7 @@ Links:
     - [MNIST Dataset](http://yann.lecun.com/exdb/mnist/).
 Author: Aymeric Damien
 Project: https://github.com/aymericdamien/TensorFlow-Examples/
-"""
 
-'''
 Nice visualisations of convolutions:
 https://github.com/vdumoulin/conv_arithmetic
 
@@ -21,7 +19,8 @@ Nice blog posts:
 
 Example of convolutions and transposed convolutions:
 https://www.programcreek.com/python/example/94702/tensorflow.contrib.layers.conv2d_transpose
-'''
+
+"""
 
 from __future__ import division, print_function, absolute_import
 

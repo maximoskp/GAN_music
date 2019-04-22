@@ -46,7 +46,7 @@ np.random.shuffle( serialised_segments )
 
 # Training Params
 num_steps = 20000
-batch_size = 32
+batch_size = 128
 
 # __MAX__
 # split in batches

@@ -81,11 +81,11 @@ def generator(x, reuse=False):
     with tf.variable_scope('Generator', reuse=reuse):
         # TensorFlow Layers automatically create variables and calculate their
         # shape, based on the input.
-        x = tf.layers.dense(x, units= (int(np.ceil(rows/4))-1) * (int(np.floor(columns/4))-1) * 128)
+        x = tf.layers.dense(x, units= (int(np.floor(rows/4))-1) * (int(np.floor(columns/4))-1) * 128)
         x = tf.nn.tanh(x)
         # Reshape to a 4-D array of images: (batch, height, width, channels)
         # New shape: (batch, 6, 6, 128)
-        x = tf.reshape(x, shape=[-1, int(np.ceil(rows/4))-1, int(np.floor(columns/4))-1, 128])
+        x = tf.reshape(x, shape=[-1, int(np.floor(rows/4))-1, int(np.floor(columns/4))-1, 128])
         # Deconvolution, image shape: (batch, 14, 14, 64)
         x = tf.layers.conv2d_transpose(x, 64, 4, strides=2)
         # Deconvolution, image shape: (batch, 28, 28, 1)
@@ -199,6 +199,7 @@ with tf.Session() as sess:
         # Noise input.
         z = np.random.uniform(-1., 1., size=[4, noise_dim])
         g = sess.run(gen_sample, feed_dict={noise_input: z})
+        print('g.shape: ', g.shape)
         for j in range(4):
             # Generate image from noise. Extend to 3 channels for matplot figure.
             img = np.reshape(np.repeat(g[j][:, :, np.newaxis], 3, axis=2),

@@ -44,9 +44,6 @@ with open('saved_data' + os.sep + 'data_tower.pickle', 'rb') as handle:
 
 np.random.shuffle( serialised_segments )
 
-print('rows: ', rows)
-print('columns: ', columns)
-
 # Training Params
 num_steps = 1000
 batch_size = 128
@@ -84,11 +81,11 @@ def generator(x, reuse=False):
     with tf.variable_scope('Generator', reuse=reuse):
         # TensorFlow Layers automatically create variables and calculate their
         # shape, based on the input.
-        x = tf.layers.dense(x, units= (int(np.ceil(rows/4))-1) * (int(np.floor(columns/4))-1) * 128)
+        x = tf.layers.dense(x, units= (int(np.floor(rows/4))-1) * (int(np.floor(columns/4))-1) * 128)
         x = tf.nn.tanh(x)
         # Reshape to a 4-D array of images: (batch, height, width, channels)
         # New shape: (batch, 6, 6, 128)
-        x = tf.reshape(x, shape=[-1, int(np.ceil(rows/4))-1, int(np.floor(columns/4))-1, 128])
+        x = tf.reshape(x, shape=[-1, int(np.floor(rows/4))-1, int(np.floor(columns/4))-1, 128])
         # Deconvolution, image shape: (batch, 14, 14, 64)
         x = tf.layers.conv2d_transpose(x, 64, 4, strides=2)
         # Deconvolution, image shape: (batch, 28, 28, 1)

@@ -105,7 +105,7 @@ def discriminator(x, reuse=False):
 # Build Networks
 # Network Inputs
 noise_input = tf.placeholder(tf.float32, shape=[None, noise_dim])
-real_image_input = tf.placeholder(tf.float32, shape=[None, 28, 28, 1])
+real_image_input = tf.placeholder(tf.float32, shape=[None, rows, columns, 1])
 
 # Build Generator Network
 gen_sample = generator(noise_input)
@@ -160,7 +160,7 @@ with tf.Session() as sess:
         # Prepare Input Data
         # Get the next batch of MNIST data (only images are needed, not labels)
         batch_x = batches_train[ batch_idx ]
-        batch_x = np.reshape(batch_x, newshape=[-1, 28, 28, 1])
+        batch_x = np.reshape(batch_x, newshape=[-1, rows, columns, 1])
         batch_idx += 1
         batch_idx = batch_idx%len(batches_train)
         # Generate noise to feed to the generator
@@ -191,7 +191,7 @@ with tf.Session() as sess:
         for j in range(4):
             # Generate image from noise. Extend to 3 channels for matplot figure.
             img = np.reshape(np.repeat(g[j][:, :, np.newaxis], 3, axis=2),
-                             newshape=(28, 28, 3))
+                             newshape=(rows, columns, 3))
             a[j][i].imshow(img)
 
     # f.show()

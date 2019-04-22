@@ -44,6 +44,9 @@ with open('saved_data' + os.sep + 'data_tower.pickle', 'rb') as handle:
 
 np.random.shuffle( serialised_segments )
 
+print('rows: ', rows)
+print('columns: ', columns)
+
 # Training Params
 num_steps = 1000
 batch_size = 128

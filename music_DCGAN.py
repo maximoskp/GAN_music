@@ -11,6 +11,18 @@ Author: Aymeric Damien
 Project: https://github.com/aymericdamien/TensorFlow-Examples/
 """
 
+'''
+Nice visualisations of convolutions:
+https://github.com/vdumoulin/conv_arithmetic
+
+Nice blog posts:
+- https://medium.com/@mozesr/deep-convolutional-gans-notes-746d891056d7
+- https://towardsdatascience.com/types-of-convolutions-in-deep-learning-717013397f4d
+
+Example of convolutions and transposed convolutions:
+https://www.programcreek.com/python/example/94702/tensorflow.contrib.layers.conv2d_transpose
+'''
+
 from __future__ import division, print_function, absolute_import
 
 import matplotlib.pyplot as plt
@@ -70,11 +82,11 @@ def generator(x, reuse=False):
     with tf.variable_scope('Generator', reuse=reuse):
         # TensorFlow Layers automatically create variables and calculate their
         # shape, based on the input.
-        x = tf.layers.dense(x, units=6 * 6 * 128)
+        x = tf.layers.dense(x, units= (int(np.floor(rows/4))-1) * (int(np.floor(columns/4))-1) * 128)
         x = tf.nn.tanh(x)
         # Reshape to a 4-D array of images: (batch, height, width, channels)
         # New shape: (batch, 6, 6, 128)
-        x = tf.reshape(x, shape=[-1, 6, 6, 128])
+        x = tf.reshape(x, shape=[-1, int(np.floor(rows/4))-1, int(np.floor(columns/4))-1, 128])
         # Deconvolution, image shape: (batch, 14, 14, 64)
         x = tf.layers.conv2d_transpose(x, 64, 4, strides=2)
         # Deconvolution, image shape: (batch, 28, 28, 1)

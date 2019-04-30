@@ -87,9 +87,9 @@ def generator(x, reuse=False):
         # New shape: (batch, 15, 15, 128)
         x = tf.reshape(x, shape=[-1, int(np.floor(rows/4))-1, int(np.floor(columns/4))-1, 128])
         # Deconvolution, image shape: (batch, 32, 32, 64)
-        x = tf.layers.conv2d_transpose(x, 64, [5,4], strides=2)
+        x = tf.layers.conv2d_transpose(x, 64, [4,4], strides=2)
         # Deconvolution, image shape: (batch, 64, 64, 1)
-        x = tf.layers.conv2d_transpose(x, 1, 2, strides=2)
+        x = tf.layers.conv2d_transpose(x, 1, [3,2], strides=2)
         # Apply sigmoid to clip values between 0 and 1
         x = tf.nn.sigmoid(x)
         return x
